@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -14,8 +13,6 @@ import RTNCalculator from 'rtn-calculator/js/NativeCalculator';
 
 function App(): JSX.Element {
   const [result, setResult] = useState<number | null>(null);
-
-  const isDarkMode = useColorScheme() === 'dark';
 
   const add = async () => {
     const value = await RTNCalculator?.add(3, 7);
@@ -27,10 +24,7 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={isDarkMode ? Colors.darker : Colors.lighter}
-      />
+      <StatusBar barStyle={'dark-content'} />
       <ScrollView contentContainerStyle={styles.scrollViewContentContainer}>
         <View style={styles.container}>
           <TouchableOpacity style={styles.button} onPress={add}>
@@ -46,6 +40,7 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
+    backgroundColor: Colors.lighter,
   },
   container: {
     backgroundColor: Colors.lighter,
